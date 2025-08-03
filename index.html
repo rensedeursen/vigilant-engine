@@ -10,6 +10,19 @@
 <style>
   #map { height: 100vh; margin:0; padding:0; }
   body, html { height: 100%; margin: 0; padding: 0; }
+  .popup-button {
+    margin-top: 5px;
+    padding: 5px 8px;
+    background-color: #3366cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .popup-button:hover {
+    background-color: #254a99;
+  }
 </style>
 </head>
 <body>
@@ -17,14 +30,12 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
 <script>
-
 // Start locatie: Vagnas (Ardèche)
 const vagnasCoords = [44.3934, 4.3500];
 
-// Wijn domeinen data: naam, regio, beschrijving, coords (geschat)
+// Domein-data
 const domeinen = [
   {naam: "Domaine Raspail-Ay", regio: "Gigondas", beschrijving: "Klassieke Grenache/Syrah/Mourvèdre", coords: [44.166, 4.993]},
   {naam: "Domaine du Cayron", regio: "Gigondas", beschrijving: "Traditioneel familiebedrijf", coords: [44.167, 4.995]},
@@ -33,33 +44,28 @@ const domeinen = [
   {naam: "Domaine Brusset", regio: "Gigondas", beschrijving: "Meerdere cuvées, HVE-certificatie", coords: [44.165, 4.989]},
   {naam: "Château la Thébaïde", regio: "Gigondas", beschrijving: "Kleine productie, eenvoudig", coords: [44.163, 4.995]},
   {naam: "Domaine des Pasquiers", regio: "Gigondas", beschrijving: "Traditioneel en karaktervol", coords: [44.167, 4.991]},
-  
   {naam: "Domaine de Durban", regio: "Beaumes de Venise", beschrijving: "Familiebedrijf, Cru Beaumes & Muscat", coords: [44.157, 4.928]},
   {naam: "Demoiselle Suzette", regio: "Beaumes de Venise", beschrijving: "Ecologisch beheer", coords: [44.156, 4.931]},
   {naam: "Domaine des Bernardins", regio: "Beaumes de Venise", beschrijving: "Muscat-specialist", coords: [44.154, 4.930]},
   {naam: "Domaine de Fenouillet", regio: "Beaumes de Venise", beschrijving: "Biologisch, familiebedrijf", coords: [44.158, 4.932]},
   {naam: "Domaine de Piéblanc", regio: "Beaumes de Venise", beschrijving: "Biologisch, frisse Beaumes rouges", coords: [44.155, 4.934]},
   {naam: "Ferme Saint‑Martin", regio: "Beaumes de Venise", beschrijving: "Biodynamisch, hooggelegen", coords: [44.160, 4.927]},
-  
   {naam: "Domaine Vallot", regio: "Vinsobres", beschrijving: "Biodynamisch familiebedrijf", coords: [44.130, 5.040]},
   {naam: "Serre Besson", regio: "Vinsobres", beschrijving: "Biologisch, sulfietvrij", coords: [44.132, 5.038]},
   {naam: "Domaine Le Mirabeau", regio: "Vinsobres", beschrijving: "Biologisch, fruitig en strak", coords: [44.131, 5.041]},
   {naam: "Domaine l'Ancienne École", regio: "Vinsobres", beschrijving: "Biologisch, proeverij op afspraak", coords: [44.129, 5.039]},
   {naam: "Domaine Pascal & Richard Jaume", regio: "Vinsobres", beschrijving: "Natuurlijke wijn, beperkte oplages", coords: [44.130, 5.042]},
-  
   {naam: "Domaine de la Bastide", regio: "Visan", beschrijving: "Biologisch & HVE gecertificeerd", coords: [44.132, 5.101]},
   {naam: "Domaine Roche Audran", regio: "Visan", beschrijving: "Biodynamisch, oude stokken", coords: [44.134, 5.102]},
   {naam: "Domaine la Guintrandy", regio: "Visan", beschrijving: "Traditioneel terroir", coords: [44.131, 5.100]},
   {naam: "Domaine des Lauribert", regio: "Visan", beschrijving: "Blend, hoog gewaardeerd", coords: [44.133, 5.103]},
   {naam: "Domaine La Florane", regio: "Visan", beschrijving: "Bio-dynamisch, sulfietvrij", coords: [44.130, 5.099]},
   {naam: "Petit Ours Syrah", regio: "Visan", beschrijving: "100% Syrah, bio", coords: [44.135, 5.098]},
-  
   {naam: "Domaine du Séminaire", regio: "Valréas", beschrijving: "Biologisch, Villages rood en wit", coords: [44.211, 4.988]},
   {naam: "Domaine La Décelle", regio: "Valréas", beschrijving: "Biologisch, gestructureerd", coords: [44.213, 4.989]},
   {naam: "Clos Bellane", regio: "Valréas", beschrijving: "Bio/biodynamisch, fris", coords: [44.210, 4.990]},
   {naam: "Domaine de Lumian", regio: "Valréas", beschrijving: "Biologisch, handwerk", coords: [44.212, 4.987]},
   {naam: "Domaine Gramenon", regio: "Valréas", beschrijving: "Biodynamisch, kleinschalig", coords: [44.209, 4.991]},
-  
   {naam: "Domaine la Fourmone", regio: "Vacqueyras", beschrijving: "Biologisch, puur terroir", coords: [44.159, 4.980]},
   {naam: "Domaine d’Ouréa", regio: "Vacqueyras", beschrijving: "Bio-biodynamisch, betonkuip rijping", coords: [44.158, 4.982]},
   {naam: "Camille Cayran", regio: "Vacqueyras", beschrijving: "Biologisch, rijk & kruidig", coords: [44.157, 4.985]},
@@ -80,34 +86,31 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Marker cluster groep
 const markers = L.markerClusterGroup();
 
-// Marker voor Vagnas (startpunt)
-const vagnasMarker = L.marker(vagnasCoords).addTo(map);
-vagnasMarker.bindPopup("Vagnas (Startpunt)").openPopup();
+// Marker voor Vagnas
+L.marker(vagnasCoords).addTo(map).bindPopup("Vagnas (Startpunt)");
 
-// Routing control via leaflet-routing-machine CDN
-const routingControl = L.Routing.control({
-    waypoints: [],
-    routeWhileDragging: true,
-    addWaypoints: false,
-    draggableWaypoints: false,
-    createMarker: function() { return null; }
-}).addTo(map);
-
-// Voeg markers toe met klik om route vanaf Vagnas te tonen
+// Voeg domeinen toe
 domeinen.forEach(d => {
-    const marker = L.marker(d.coords);
-    marker.bindTooltip(d.naam);
-    marker.bindPopup(`<b>${d.naam}</b><br>${d.regio}<br>${d.beschrijving}<br><button onclick="routeNaar([${d.coords}])">Route vanaf Vagnas</button>`);
-    markers.addLayer(marker);
+  const link = `https://www.google.com/maps?q=${d.coords[0]},${d.coords[1]}`;
+  const popup = `
+    <b>${d.naam}</b><br>
+    ${d.regio}<br>
+    ${d.beschrijving}<br>
+    <button class="popup-button" onclick="copyLink('${link}')">Kopieer GPS-link</button>
+  `;
+  L.marker(d.coords).bindPopup(popup).addTo(markers);
 });
+
 map.addLayer(markers);
 
-// Functie om route vanaf Vagnas naar marker te tekenen
-function routeNaar(latlng) {
-    routingControl.setWaypoints([L.latLng(vagnasCoords), L.latLng(latlng)]);
+// Kopieerfunctie
+function copyLink(url) {
+  navigator.clipboard.writeText(url).then(() => {
+    alert("GPS-link gekopieerd naar klembord!");
+  }, () => {
+    alert("Kopiëren mislukt.");
+  });
 }
-
 </script>
-
 </body>
 </html>
