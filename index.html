@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8" />
-<title>Rhone Wijn Domeinen Kaart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
-<style>
-  #map { height: 100vh; margin:0; padding:0; }
-  body, html { height: 100%; margin: 0; padding: 0; }
-  .popup-button {
-    margin-top: 5px;
-    padding: 5px 8px;
-    background-color: #3366cc;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  .popup-button:hover {
-    background-color: #254a99;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>Rhone Wijn Domeinen Kaart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+  <style>
+    #map { height: 100vh; margin:0; padding:0; }
+    body, html { height: 100%; margin: 0; padding: 0; }
+    a.map-link {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 5px 8px;
+      background-color: #2c6fbb;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    a.map-link:hover {
+      background-color: #174a88;
+    }
+  </style>
 </head>
 <body>
 <div id="map"></div>
@@ -32,85 +32,51 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
 <script>
-// Start locatie: Vagnas (Ardèche)
+// Coördinaten Vagnas (startpunt)
 const vagnasCoords = [44.3934, 4.3500];
 
-// Domein-data
+// Lijst domeinen
 const domeinen = [
   {naam: "Domaine Raspail-Ay", regio: "Gigondas", beschrijving: "Klassieke Grenache/Syrah/Mourvèdre", coords: [44.166, 4.993]},
   {naam: "Domaine du Cayron", regio: "Gigondas", beschrijving: "Traditioneel familiebedrijf", coords: [44.167, 4.995]},
   {naam: "Domaine Saint-Damien", regio: "Gigondas", beschrijving: "Budgetvriendelijke Gigondas", coords: [44.164, 4.990]},
-  {naam: "Domaine la Bouissière", regio: "Gigondas", beschrijving: "Bekend en geprezen", coords: [44.168, 4.992]},
-  {naam: "Domaine Brusset", regio: "Gigondas", beschrijving: "Meerdere cuvées, HVE-certificatie", coords: [44.165, 4.989]},
-  {naam: "Château la Thébaïde", regio: "Gigondas", beschrijving: "Kleine productie, eenvoudig", coords: [44.163, 4.995]},
-  {naam: "Domaine des Pasquiers", regio: "Gigondas", beschrijving: "Traditioneel en karaktervol", coords: [44.167, 4.991]},
-  {naam: "Domaine de Durban", regio: "Beaumes de Venise", beschrijving: "Familiebedrijf, Cru Beaumes & Muscat", coords: [44.157, 4.928]},
-  {naam: "Demoiselle Suzette", regio: "Beaumes de Venise", beschrijving: "Ecologisch beheer", coords: [44.156, 4.931]},
-  {naam: "Domaine des Bernardins", regio: "Beaumes de Venise", beschrijving: "Muscat-specialist", coords: [44.154, 4.930]},
-  {naam: "Domaine de Fenouillet", regio: "Beaumes de Venise", beschrijving: "Biologisch, familiebedrijf", coords: [44.158, 4.932]},
-  {naam: "Domaine de Piéblanc", regio: "Beaumes de Venise", beschrijving: "Biologisch, frisse Beaumes rouges", coords: [44.155, 4.934]},
+  {naam: "Domaine de Durban", regio: "Beaumes de Venise", beschrijving: "Cru Beaumes & Muscat", coords: [44.157, 4.928]},
   {naam: "Ferme Saint‑Martin", regio: "Beaumes de Venise", beschrijving: "Biodynamisch, hooggelegen", coords: [44.160, 4.927]},
   {naam: "Domaine Vallot", regio: "Vinsobres", beschrijving: "Biodynamisch familiebedrijf", coords: [44.130, 5.040]},
-  {naam: "Serre Besson", regio: "Vinsobres", beschrijving: "Biologisch, sulfietvrij", coords: [44.132, 5.038]},
-  {naam: "Domaine Le Mirabeau", regio: "Vinsobres", beschrijving: "Biologisch, fruitig en strak", coords: [44.131, 5.041]},
-  {naam: "Domaine l'Ancienne École", regio: "Vinsobres", beschrijving: "Biologisch, proeverij op afspraak", coords: [44.129, 5.039]},
-  {naam: "Domaine Pascal & Richard Jaume", regio: "Vinsobres", beschrijving: "Natuurlijke wijn, beperkte oplages", coords: [44.130, 5.042]},
-  {naam: "Domaine de la Bastide", regio: "Visan", beschrijving: "Biologisch & HVE gecertificeerd", coords: [44.132, 5.101]},
   {naam: "Domaine Roche Audran", regio: "Visan", beschrijving: "Biodynamisch, oude stokken", coords: [44.134, 5.102]},
-  {naam: "Domaine la Guintrandy", regio: "Visan", beschrijving: "Traditioneel terroir", coords: [44.131, 5.100]},
-  {naam: "Domaine des Lauribert", regio: "Visan", beschrijving: "Blend, hoog gewaardeerd", coords: [44.133, 5.103]},
-  {naam: "Domaine La Florane", regio: "Visan", beschrijving: "Bio-dynamisch, sulfietvrij", coords: [44.130, 5.099]},
-  {naam: "Petit Ours Syrah", regio: "Visan", beschrijving: "100% Syrah, bio", coords: [44.135, 5.098]},
-  {naam: "Domaine du Séminaire", regio: "Valréas", beschrijving: "Biologisch, Villages rood en wit", coords: [44.211, 4.988]},
-  {naam: "Domaine La Décelle", regio: "Valréas", beschrijving: "Biologisch, gestructureerd", coords: [44.213, 4.989]},
-  {naam: "Clos Bellane", regio: "Valréas", beschrijving: "Bio/biodynamisch, fris", coords: [44.210, 4.990]},
-  {naam: "Domaine de Lumian", regio: "Valréas", beschrijving: "Biologisch, handwerk", coords: [44.212, 4.987]},
-  {naam: "Domaine Gramenon", regio: "Valréas", beschrijving: "Biodynamisch, kleinschalig", coords: [44.209, 4.991]},
+  {naam: "Domaine du Séminaire", regio: "Valréas", beschrijving: "Villages rood en wit", coords: [44.211, 4.988]},
   {naam: "Domaine la Fourmone", regio: "Vacqueyras", beschrijving: "Biologisch, puur terroir", coords: [44.159, 4.980]},
-  {naam: "Domaine d’Ouréa", regio: "Vacqueyras", beschrijving: "Bio-biodynamisch, betonkuip rijping", coords: [44.158, 4.982]},
-  {naam: "Camille Cayran", regio: "Vacqueyras", beschrijving: "Biologisch, rijk & kruidig", coords: [44.157, 4.985]},
-  {naam: "Clos de Caveau", regio: "Vacqueyras", beschrijving: "Biologisch, elegant", coords: [44.156, 4.983]},
-  {naam: "Domaine la Bouïssière", regio: "Vacqueyras", beschrijving: "Artisan bio, krachtig & complex", coords: [44.155, 4.984]},
-  {naam: "Le Sang des Cailloux", regio: "Vacqueyras", beschrijving: "Biologisch, sappig & fris", coords: [44.154, 4.986]}
+  {naam: "Le Sang des Cailloux", regio: "Vacqueyras", beschrijving: "Sappig & fris", coords: [44.154, 4.986]}
 ];
 
 // Init kaart
 const map = L.map('map').setView(vagnasCoords, 9);
 
-// Voeg OpenStreetMap tiles toe
+// OpenStreetMap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '© OpenStreetMap contributors'
+  maxZoom: 18,
+  attribution: '© OpenStreetMap'
 }).addTo(map);
 
-// Marker cluster groep
+// Marker cluster
 const markers = L.markerClusterGroup();
 
 // Marker voor Vagnas
 L.marker(vagnasCoords).addTo(map).bindPopup("Vagnas (Startpunt)");
 
-// Voeg domeinen toe
+// Domeinen toevoegen
 domeinen.forEach(d => {
-  const link = `https://www.google.com/maps?q=${d.coords[0]},${d.coords[1]}`;
+  const googleMapsLink = `https://www.google.com/maps?q=${d.coords[0]},${d.coords[1]}`;
   const popup = `
     <b>${d.naam}</b><br>
-    ${d.regio}<br>
+    <i>${d.regio}</i><br>
     ${d.beschrijving}<br>
-    <button class="popup-button" onclick="copyLink('${link}')">Kopieer GPS-link</button>
+    <a class="map-link" href="${googleMapsLink}" target="_blank">📍 Open in Google Maps</a>
   `;
   L.marker(d.coords).bindPopup(popup).addTo(markers);
 });
 
 map.addLayer(markers);
-
-// Kopieerfunctie
-function copyLink(url) {
-  navigator.clipboard.writeText(url).then(() => {
-    alert("GPS-link gekopieerd naar klembord!");
-  }, () => {
-    alert("Kopiëren mislukt.");
-  });
-}
 </script>
 </body>
 </html>
