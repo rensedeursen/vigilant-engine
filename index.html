@@ -1,73 +1,1102 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html>
 <head>
-  <meta charset="UTF‑8">
-  <title>Rhone Wijn Domeinen Kaart</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
-  <style>
-    #map { height: 100vh; margin:0; padding:0; }
-    body,html { margin:0; padding:0; height:100%; }
-    a.map-link {
-      display:inline-block; margin-top:6px; padding:5px 8px;
-      background:#2c6fbb; color:#fff; text-decoration:none;
-      border-radius:4px; font-size:12px;
-    }
-    a.map-link:hover { background:#174a88; }
-  </style>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a53920f4fefa4833f208af2f2d7be03e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
 </head>
 <body>
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-
-<script>
-  const map = L.map('map').setView([44.35, 4.5], 10);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:'© OpenStreetMap contributors'
-  }).addTo(map);
-
-  const cluster = L.markerClusterGroup();
-  L.marker([44.3934, 4.3500]).addTo(map).bindPopup("Vagnas (Startpunt)");
-
-  const domeinen = [
-    {
-      naam: "Domaine Raspail‑Ay",
-      regio: "Gigondas",
-      beschrijving: "Elegante klassieker, klein domein. 80 % Grenache, 15 % Syrah, 5 % Mourvèdre, max 8000 cases/jr." ,
-      coords: [44.166, 4.993],
-      website: null
-    },
-    {
-      naam: "Domaine du Cayron",
-      regio: "Gigondas",
-      beschrijving: "Traditioneel familiebedrijf, hoge ligging, ongefilterd, zeer lage opbrengst op garrigue-terroir.",
-      coords: [44.167, 4.995],
-      website: "https://www.domaine-cayron.com/"
-    },
-    {
-      naam: "Domaine Alary",
-      regio: "Cairanne",
-      beschrijving: "Biologisch sinds 2009, geen houtrijping, cuvée La Brunote indrukwekkend elegant.",
-      coords: [44.241, 4.904],
-      website: "https://www.domaine-alary.com/"
-    },
-    // Voeg hier de overige 41 domeinen toe in zelfde structuur...
-  ];
-
-  domeinen.forEach(d => {
-    const maps = `https://www.google.com/maps?q=${d.coords[0]},${d.coords[1]}`;
-    const gmButton = `<a class="map-link" href="${maps}" target="_blank">📍 Google Maps</a>`;
-    const webButton = d.website ?
-      `<a class="map-link" href="${d.website}" target="_blank">🌐 Bezoek website</a>` : "";
-    const popup = `<b>${d.naam}</b><br><i>${d.regio}</i><br>${d.beschrijving}<br>${gmButton}${webButton}`;
-    L.marker(d.coords).bindPopup(popup).addTo(cluster);
-  });
-
-  map.addLayer(cluster);
-</script>
+    
+    
+            <div class="folium-map" id="map_a53920f4fefa4833f208af2f2d7be03e" ></div>
+        
 </body>
+<script>
+    
+    
+            var map_a53920f4fefa4833f208af2f2d7be03e = L.map(
+                "map_a53920f4fefa4833f208af2f2d7be03e",
+                {
+                    center: [44.35, 4.9],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_30f368790b8681cbc7457940dceabd6e = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_a53920f4fefa4833f208af2f2d7be03e);
+        
+    
+            var marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5 = L.markerClusterGroup(
+                {}
+            );
+            map_a53920f4fefa4833f208af2f2d7be03e.addLayer(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var marker_2b59ff50588b371b1f48215572b3dcc7 = L.marker(
+                [44.1664, 5.0029],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_d541ccb8b109ef901cbdbcb6dd3657ea = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2b59ff50588b371b1f48215572b3dcc7.setIcon(icon_d541ccb8b109ef901cbdbcb6dd3657ea);
+        
+    
+        var popup_d73d5cb666eb1b27a4b4a2dda302fd24 = L.popup({"maxWidth": 300});
+
+        
+            var html_639d638a380079d54a4232da97d7c306 = $(`<div id="html_639d638a380079d54a4232da97d7c306" style="width: 100.0%; height: 100.0%;">     <b>Domaine Raspail‑Ay</b><br>     <i>Gigondas</i><br>     Elegante klassieker (~40 ha) met Grenache/Syrah/Mourvèdre-blend. Authentiek, internationaal gewaardeerd.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1664,5.0029" target="_blank">📍 Google Maps</a><br>     </div>`)[0];
+            popup_d73d5cb666eb1b27a4b4a2dda302fd24.setContent(html_639d638a380079d54a4232da97d7c306);
+        
+
+        marker_2b59ff50588b371b1f48215572b3dcc7.bindPopup(popup_d73d5cb666eb1b27a4b4a2dda302fd24)
+        ;
+
+        
+    
+    
+            var marker_790eb9ba2b7d2259da521932060aab4d = L.marker(
+                [44.1653, 5.0047],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_8a7a1e2c76ad9d06a00aef5ef24bdef7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_790eb9ba2b7d2259da521932060aab4d.setIcon(icon_8a7a1e2c76ad9d06a00aef5ef24bdef7);
+        
+    
+        var popup_14bc05fdbf10abbe9822a3cc2919f0e9 = L.popup({"maxWidth": 300});
+
+        
+            var html_2b71602fea440a529de90830d5f69988 = $(`<div id="html_2b71602fea440a529de90830d5f69988" style="width: 100.0%; height: 100.0%;">     <b>Domaine du Cayron</b><br>     <i>Gigondas</i><br>     Traditioneel familiebedrijf, ongefilterde wijnen van hooggelegen percelen.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1653,5.0047" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-cayron.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_14bc05fdbf10abbe9822a3cc2919f0e9.setContent(html_2b71602fea440a529de90830d5f69988);
+        
+
+        marker_790eb9ba2b7d2259da521932060aab4d.bindPopup(popup_14bc05fdbf10abbe9822a3cc2919f0e9)
+        ;
+
+        
+    
+    
+            var marker_bf75dd9ecd03040555646be5d0dff8f5 = L.marker(
+                [44.1499, 5.0087],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_dabb3484eefe491c4b263468929ce2dd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_bf75dd9ecd03040555646be5d0dff8f5.setIcon(icon_dabb3484eefe491c4b263468929ce2dd);
+        
+    
+        var popup_6391269e7fa8bc6a9cdbf80f417e126f = L.popup({"maxWidth": 300});
+
+        
+            var html_c27eab38743d7410145556bb1cf602e7 = $(`<div id="html_c27eab38743d7410145556bb1cf602e7" style="width: 100.0%; height: 100.0%;">     <b>Domaine Saint‑Damien</b><br>     <i>Gigondas</i><br>     Bekend als uitstekende, betaalbare Gigondas. Biologische wijngaarden, klassieke stijl.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1499,5.0087" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domainesaintdamien.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_6391269e7fa8bc6a9cdbf80f417e126f.setContent(html_c27eab38743d7410145556bb1cf602e7);
+        
+
+        marker_bf75dd9ecd03040555646be5d0dff8f5.bindPopup(popup_6391269e7fa8bc6a9cdbf80f417e126f)
+        ;
+
+        
+    
+    
+            var marker_ccaeb8ef4f9768b5c46c0af60885be0f = L.marker(
+                [44.1702, 5.0106],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_cf97ab8195bbc1f539cbee4a007ae5e5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ccaeb8ef4f9768b5c46c0af60885be0f.setIcon(icon_cf97ab8195bbc1f539cbee4a007ae5e5);
+        
+    
+        var popup_8952af6e60bdf18ff450ba80ec0518fd = L.popup({"maxWidth": 300});
+
+        
+            var html_8ca74317e60519ac9b0302afabc39319 = $(`<div id="html_8ca74317e60519ac9b0302afabc39319" style="width: 100.0%; height: 100.0%;">     <b>Domaine la Bouissière</b><br>     <i>Gigondas</i><br>     Geprezen domein met krachtige maar elegante wijnen. Hooggelegen wijngaarden.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1702,5.0106" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.labouissiere.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_8952af6e60bdf18ff450ba80ec0518fd.setContent(html_8ca74317e60519ac9b0302afabc39319);
+        
+
+        marker_ccaeb8ef4f9768b5c46c0af60885be0f.bindPopup(popup_8952af6e60bdf18ff450ba80ec0518fd)
+        ;
+
+        
+    
+    
+            var marker_2894de05225a05500e5b587e7f7ae313 = L.marker(
+                [44.2386, 4.9878],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_aae6eca304dab89e3b86e0aadf5866b4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2894de05225a05500e5b587e7f7ae313.setIcon(icon_aae6eca304dab89e3b86e0aadf5866b4);
+        
+    
+        var popup_85342d4ba98f3b29753312bdea6e25de = L.popup({"maxWidth": 300});
+
+        
+            var html_7dacdeb33edeb816b5a591274661e9c2 = $(`<div id="html_7dacdeb33edeb816b5a591274661e9c2" style="width: 100.0%; height: 100.0%;">     <b>Domaine Brusset</b><br>     <i>Gigondas / Cairanne</i><br>     Meerdere cuvées waaronder 'Le Grand Montmirail'. Zowel in Gigondas als Cairanne actief.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2386,4.9878" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domainebrusset.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_85342d4ba98f3b29753312bdea6e25de.setContent(html_7dacdeb33edeb816b5a591274661e9c2);
+        
+
+        marker_2894de05225a05500e5b587e7f7ae313.bindPopup(popup_85342d4ba98f3b29753312bdea6e25de)
+        ;
+
+        
+    
+    
+            var marker_4f477a1ff57168abf66355756bedf3e9 = L.marker(
+                [44.1605, 5.0035],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_c05bc10b6d5957642997b41232729794 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_4f477a1ff57168abf66355756bedf3e9.setIcon(icon_c05bc10b6d5957642997b41232729794);
+        
+    
+        var popup_40301155455845deffa45659dfaac60f = L.popup({"maxWidth": 300});
+
+        
+            var html_5e648c71e1d9ea82bd202671a52e2cc1 = $(`<div id="html_5e648c71e1d9ea82bd202671a52e2cc1" style="width: 100.0%; height: 100.0%;">     <b>Château la Thébaïde</b><br>     <i>Gigondas</i><br>     Eenvoudige, charmante Gigondas rond €18. Klein domein met lokale verkoop.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1605,5.0035" target="_blank">📍 Google Maps</a><br>     </div>`)[0];
+            popup_40301155455845deffa45659dfaac60f.setContent(html_5e648c71e1d9ea82bd202671a52e2cc1);
+        
+
+        marker_4f477a1ff57168abf66355756bedf3e9.bindPopup(popup_40301155455845deffa45659dfaac60f)
+        ;
+
+        
+    
+    
+            var marker_5208cb4192998f158b8bd248df542004 = L.marker(
+                [44.1944, 5.0075],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_1759e44b1a56f2ec5e7a4a932ebcf5c8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5208cb4192998f158b8bd248df542004.setIcon(icon_1759e44b1a56f2ec5e7a4a932ebcf5c8);
+        
+    
+        var popup_18c664735cdfba7a00ee00969e8b1bb2 = L.popup({"maxWidth": 300});
+
+        
+            var html_a076ea966bcf55fdafccadf6816d0343 = $(`<div id="html_a076ea966bcf55fdafccadf6816d0343" style="width: 100.0%; height: 100.0%;">     <b>Domaine des Pasquiers</b><br>     <i>Gigondas / Sablet</i><br>     Traditioneel werkende familie, rode Gigondas met karakter. Ook actief in Sablet.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1944,5.0075" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-des-pasquiers.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_18c664735cdfba7a00ee00969e8b1bb2.setContent(html_a076ea966bcf55fdafccadf6816d0343);
+        
+
+        marker_5208cb4192998f158b8bd248df542004.bindPopup(popup_18c664735cdfba7a00ee00969e8b1bb2)
+        ;
+
+        
+    
+    
+            var marker_510296ad12843c1c9f61b1fdca138783 = L.marker(
+                [44.1303, 5.0487],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_b6ec18685a71eae73a49c666021c0b4c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_510296ad12843c1c9f61b1fdca138783.setIcon(icon_b6ec18685a71eae73a49c666021c0b4c);
+        
+    
+        var popup_5e6ad1e10d4cac5d23000bea30215a37 = L.popup({"maxWidth": 300});
+
+        
+            var html_339e66d179fe3027cc098a937a05188e = $(`<div id="html_339e66d179fe3027cc098a937a05188e" style="width: 100.0%; height: 100.0%;">     <b>Domaine de Durban</b><br>     <i>Beaumes de Venise</i><br>     Familiebedrijf met zowel rode Beaumes als Muscat VDN. Indrukwekkend uitzicht.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1303,5.0487" target="_blank">📍 Google Maps</a><br>     </div>`)[0];
+            popup_5e6ad1e10d4cac5d23000bea30215a37.setContent(html_339e66d179fe3027cc098a937a05188e);
+        
+
+        marker_510296ad12843c1c9f61b1fdca138783.bindPopup(popup_5e6ad1e10d4cac5d23000bea30215a37)
+        ;
+
+        
+    
+    
+            var marker_1508a9f6e10a8d06786b45ae4bf5471f = L.marker(
+                [44.1275, 5.0367],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_536af2d49e221bf83547ff0bd42e3b69 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1508a9f6e10a8d06786b45ae4bf5471f.setIcon(icon_536af2d49e221bf83547ff0bd42e3b69);
+        
+    
+        var popup_226e432c451b5c0082d938f300ff2dba = L.popup({"maxWidth": 300});
+
+        
+            var html_ced9cf761a87729906770802fb0bccec = $(`<div id="html_ced9cf761a87729906770802fb0bccec" style="width: 100.0%; height: 100.0%;">     <b>Domaine des Bernardins</b><br>     <i>Beaumes de Venise</i><br>     Muscat-specialist met delicate, bloemige stijl. Minimale interventie.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1275,5.0367" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.bernardins.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_226e432c451b5c0082d938f300ff2dba.setContent(html_ced9cf761a87729906770802fb0bccec);
+        
+
+        marker_1508a9f6e10a8d06786b45ae4bf5471f.bindPopup(popup_226e432c451b5c0082d938f300ff2dba)
+        ;
+
+        
+    
+    
+            var marker_3e49bb5d2df134c798405441143b258f = L.marker(
+                [44.1267, 5.0362],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_ba1ec8876a17cc2101d3a61a8ba7277b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_3e49bb5d2df134c798405441143b258f.setIcon(icon_ba1ec8876a17cc2101d3a61a8ba7277b);
+        
+    
+        var popup_88e52d6ee2c5954969f39f5e46fb881b = L.popup({"maxWidth": 300});
+
+        
+            var html_b8880f37e85aca7dd6869f74df84b3b1 = $(`<div id="html_b8880f37e85aca7dd6869f74df84b3b1" style="width: 100.0%; height: 100.0%;">     <b>Domaine de Fenouillet</b><br>     <i>Beaumes de Venise</i><br>     Biologisch, vijfde generatie, produceert zowel Muscat als rood.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1267,5.0362" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.fenouillet.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_88e52d6ee2c5954969f39f5e46fb881b.setContent(html_b8880f37e85aca7dd6869f74df84b3b1);
+        
+
+        marker_3e49bb5d2df134c798405441143b258f.bindPopup(popup_88e52d6ee2c5954969f39f5e46fb881b)
+        ;
+
+        
+    
+    
+            var marker_62fb09c4fe096e676bc6465df37473c2 = L.marker(
+                [44.1406, 5.0639],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_3772c1c5cad7450fca60dabc813e7c58 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_62fb09c4fe096e676bc6465df37473c2.setIcon(icon_3772c1c5cad7450fca60dabc813e7c58);
+        
+    
+        var popup_d09e51c20795e1e13117b36d7c65f80e = L.popup({"maxWidth": 300});
+
+        
+            var html_a906f181e6e0d07ec648d9fd5bf7dc70 = $(`<div id="html_a906f181e6e0d07ec648d9fd5bf7dc70" style="width: 100.0%; height: 100.0%;">     <b>Domaine Demoiselle Suzette</b><br>     <i>Beaumes de Venise</i><br>     Klein domein met ecologisch beheer. Authentiek, zonder bio-label maar met ziel.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1406,5.0639" target="_blank">📍 Google Maps</a><br>     </div>`)[0];
+            popup_d09e51c20795e1e13117b36d7c65f80e.setContent(html_a906f181e6e0d07ec648d9fd5bf7dc70);
+        
+
+        marker_62fb09c4fe096e676bc6465df37473c2.bindPopup(popup_d09e51c20795e1e13117b36d7c65f80e)
+        ;
+
+        
+    
+    
+            var marker_364b3fd5b24dc6794629f9e6ed196218 = L.marker(
+                [44.1439, 5.0361],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_cab938b62f80692f25bfb0ac1fa334d2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_364b3fd5b24dc6794629f9e6ed196218.setIcon(icon_cab938b62f80692f25bfb0ac1fa334d2);
+        
+    
+        var popup_ee03090038f79fbcb2093c085527e18e = L.popup({"maxWidth": 300});
+
+        
+            var html_ed2bf9af02089192b33fb8e2159db8e4 = $(`<div id="html_ed2bf9af02089192b33fb8e2159db8e4" style="width: 100.0%; height: 100.0%;">     <b>Domaine de Piéblanc</b><br>     <i>Beaumes de Venise</i><br>     Biologisch sinds 2020, frisse Grenache/Syrah-wijnen op 300 m hoogte.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1439,5.0361" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-pieblanc.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_ee03090038f79fbcb2093c085527e18e.setContent(html_ed2bf9af02089192b33fb8e2159db8e4);
+        
+
+        marker_364b3fd5b24dc6794629f9e6ed196218.bindPopup(popup_ee03090038f79fbcb2093c085527e18e)
+        ;
+
+        
+    
+    
+            var marker_0931eca1077963b78377b53414996eb6 = L.marker(
+                [44.1458, 5.0636],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_4381d6217591839a7c5e8437473cba65 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_0931eca1077963b78377b53414996eb6.setIcon(icon_4381d6217591839a7c5e8437473cba65);
+        
+    
+        var popup_5698b8224320250a963e8cccd03ebb7f = L.popup({"maxWidth": 300});
+
+        
+            var html_e62f2c589b44a50b3e6e4fd61790b58b = $(`<div id="html_e62f2c589b44a50b3e6e4fd61790b58b" style="width: 100.0%; height: 100.0%;">     <b>Ferme Saint‑Martin</b><br>     <i>Beaumes de Venise</i><br>     Biologisch & biodynamisch, op 1600 ft hoogte. Intense, aromatische wijnen.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1458,5.0636" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.fermesaintmartin.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_5698b8224320250a963e8cccd03ebb7f.setContent(html_e62f2c589b44a50b3e6e4fd61790b58b);
+        
+
+        marker_0931eca1077963b78377b53414996eb6.bindPopup(popup_5698b8224320250a963e8cccd03ebb7f)
+        ;
+
+        
+    
+    
+            var marker_7b0e16de41257397b3bde5a138c25207 = L.marker(
+                [44.3283, 5.0564],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_91029ba751af3c9ee99f05b06a4435fc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7b0e16de41257397b3bde5a138c25207.setIcon(icon_91029ba751af3c9ee99f05b06a4435fc);
+        
+    
+        var popup_0cf2d469a4f6ec0535a609662d658252 = L.popup({"maxWidth": 300});
+
+        
+            var html_f6e6a83ff9d71ebca8624a49ac9d78ec = $(`<div id="html_f6e6a83ff9d71ebca8624a49ac9d78ec" style="width: 100.0%; height: 100.0%;">     <b>Domaine Vallot – de Coriançon</b><br>     <i>Vinsobres</i><br>     Biodynamisch familiebedrijf in 5e generatie. Cru Vinsobres met terroirfocus.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3283,5.0564" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-vallot.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_0cf2d469a4f6ec0535a609662d658252.setContent(html_f6e6a83ff9d71ebca8624a49ac9d78ec);
+        
+
+        marker_7b0e16de41257397b3bde5a138c25207.bindPopup(popup_0cf2d469a4f6ec0535a609662d658252)
+        ;
+
+        
+    
+    
+            var marker_6b057c938261122c121ea1fc79eb76d4 = L.marker(
+                [44.3335, 5.0845],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_3960f9411c9ee985029268e5080c0e9b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6b057c938261122c121ea1fc79eb76d4.setIcon(icon_3960f9411c9ee985029268e5080c0e9b);
+        
+    
+        var popup_ed5c8e28b75cc0795043b607c5aef2d4 = L.popup({"maxWidth": 300});
+
+        
+            var html_284c68a507fe60dbbb838d8d1cac1da5 = $(`<div id="html_284c68a507fe60dbbb838d8d1cac1da5" style="width: 100.0%; height: 100.0%;">     <b>Serre Besson (Poor Devil Wines)</b><br>     <i>Vinsobres</i><br>     Zonder sulfiet, 100 % Syrah 'Ragots'. Frans-Amerikaanse stijl, puur handwerk.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3335,5.0845" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.poordevilwines.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_ed5c8e28b75cc0795043b607c5aef2d4.setContent(html_284c68a507fe60dbbb838d8d1cac1da5);
+        
+
+        marker_6b057c938261122c121ea1fc79eb76d4.bindPopup(popup_ed5c8e28b75cc0795043b607c5aef2d4)
+        ;
+
+        
+    
+    
+            var marker_b497a94414510be830a22367868ffeb5 = L.marker(
+                [44.3285, 5.0958],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_44598335cf4329e9a0a2e380adff6d05 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b497a94414510be830a22367868ffeb5.setIcon(icon_44598335cf4329e9a0a2e380adff6d05);
+        
+    
+        var popup_f80754ca32ea56c5e5db26e589862398 = L.popup({"maxWidth": 300});
+
+        
+            var html_6bb4609192dc9e746c58f0042d91a834 = $(`<div id="html_6bb4609192dc9e746c58f0042d91a834" style="width: 100.0%; height: 100.0%;">     <b>Domaine Le Mirabeau</b><br>     <i>Vinsobres</i><br>     Biologisch familiebedrijf, fruitige Cru Vinsobres. Goede prijskwaliteit.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3285,5.0958" target="_blank">📍 Google Maps</a><br>     </div>`)[0];
+            popup_f80754ca32ea56c5e5db26e589862398.setContent(html_6bb4609192dc9e746c58f0042d91a834);
+        
+
+        marker_b497a94414510be830a22367868ffeb5.bindPopup(popup_f80754ca32ea56c5e5db26e589862398)
+        ;
+
+        
+    
+    
+            var marker_ade4fa009e72959f4076320cbc8740f0 = L.marker(
+                [44.3397, 5.0869],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_106e992c0478ab08358c82a6ce3d6b3a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ade4fa009e72959f4076320cbc8740f0.setIcon(icon_106e992c0478ab08358c82a6ce3d6b3a);
+        
+    
+        var popup_c62fd2412084f6a1ee58a5f264dec8c3 = L.popup({"maxWidth": 300});
+
+        
+            var html_84c3af7e0f6d0ffb55e214a174b4db76 = $(`<div id="html_84c3af7e0f6d0ffb55e214a174b4db76" style="width: 100.0%; height: 100.0%;">     <b>Domaine l'Ancienne École</b><br>     <i>Vinsobres</i><br>     Klein domein van Anna & Wilson Thorburn. Biologisch, afspraak nodig.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3397,5.0869" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.lancienneecole.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_c62fd2412084f6a1ee58a5f264dec8c3.setContent(html_84c3af7e0f6d0ffb55e214a174b4db76);
+        
+
+        marker_ade4fa009e72959f4076320cbc8740f0.bindPopup(popup_c62fd2412084f6a1ee58a5f264dec8c3)
+        ;
+
+        
+    
+    
+            var marker_36f7934ba3fdcfb95163911a4c890f36 = L.marker(
+                [44.3322, 5.0874],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_93c2d0f3277067183ac553425e89f2d4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_36f7934ba3fdcfb95163911a4c890f36.setIcon(icon_93c2d0f3277067183ac553425e89f2d4);
+        
+    
+        var popup_37aaa8d79ce41fc43bbd35752045b3d3 = L.popup({"maxWidth": 300});
+
+        
+            var html_19e81cf3c19747b6719767a9a1903503 = $(`<div id="html_19e81cf3c19747b6719767a9a1903503" style="width: 100.0%; height: 100.0%;">     <b>Domaine Jaume – Vinea Natura</b><br>     <i>Vinsobres</i><br>     Beperkte oplages, ecologisch/natuurlijk. Hooggelegen wijngaarden.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3322,5.0874" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-jaume.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_37aaa8d79ce41fc43bbd35752045b3d3.setContent(html_19e81cf3c19747b6719767a9a1903503);
+        
+
+        marker_36f7934ba3fdcfb95163911a4c890f36.bindPopup(popup_37aaa8d79ce41fc43bbd35752045b3d3)
+        ;
+
+        
+    
+    
+            var marker_10affae284a6411da35c5d490d88c493 = L.marker(
+                [44.3329, 4.9506],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_822a855da7f1eb615c6fbb26318c38b8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_10affae284a6411da35c5d490d88c493.setIcon(icon_822a855da7f1eb615c6fbb26318c38b8);
+        
+    
+        var popup_ffc4dc160a7ec42f4d45e6f4fbeb81b4 = L.popup({"maxWidth": 300});
+
+        
+            var html_080ac5cede711d0d9142a9a5ef48d317 = $(`<div id="html_080ac5cede711d0d9142a9a5ef48d317" style="width: 100.0%; height: 100.0%;">     <b>Domaine de la Bastide</b><br>     <i>Visan</i><br>     Bio & HVE. Rijke aroma’s, wit/rosé vanaf €4,5; rood ~€12–15.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3329,4.9506" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-bastide.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_ffc4dc160a7ec42f4d45e6f4fbeb81b4.setContent(html_080ac5cede711d0d9142a9a5ef48d317);
+        
+
+        marker_10affae284a6411da35c5d490d88c493.bindPopup(popup_ffc4dc160a7ec42f4d45e6f4fbeb81b4)
+        ;
+
+        
+    
+    
+            var marker_422b060934fea36b888a599205620976 = L.marker(
+                [44.3331, 4.9462],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_903f613b9fb91d9ad8078e7b2a170e1e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_422b060934fea36b888a599205620976.setIcon(icon_903f613b9fb91d9ad8078e7b2a170e1e);
+        
+    
+        var popup_a0ad44f3061f096e79b7c2fb27bd0ac8 = L.popup({"maxWidth": 300});
+
+        
+            var html_f4a66214d82268a88150f5f4267cdb89 = $(`<div id="html_f4a66214d82268a88150f5f4267cdb89" style="width: 100.0%; height: 100.0%;">     <b>Domaine Roche Audran</b><br>     <i>Visan</i><br>     Biodynamisch (Demeter). Oude stokken, geconcentreerde rode wijnen.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3331,4.9462" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.roche-audran.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_a0ad44f3061f096e79b7c2fb27bd0ac8.setContent(html_f4a66214d82268a88150f5f4267cdb89);
+        
+
+        marker_422b060934fea36b888a599205620976.bindPopup(popup_a0ad44f3061f096e79b7c2fb27bd0ac8)
+        ;
+
+        
+    
+    
+            var marker_1e5bcd2536473c809891aef160131de4 = L.marker(
+                [44.3237, 4.9461],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_440373f2b1d46a66c557cb2e99db2690 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1e5bcd2536473c809891aef160131de4.setIcon(icon_440373f2b1d46a66c557cb2e99db2690);
+        
+    
+        var popup_f75d7e0d896fc99ceb1da558182d8664 = L.popup({"maxWidth": 300});
+
+        
+            var html_61a5d582498b8009d88d8c068be26a03 = $(`<div id="html_61a5d582498b8009d88d8c068be26a03" style="width: 100.0%; height: 100.0%;">     <b>Domaine la Guintrandy</b><br>     <i>Visan</i><br>     Traditioneel domein. Blend Syrah/Grenache, vriendelijk geprijsd.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3237,4.9461" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.guintrandy.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_f75d7e0d896fc99ceb1da558182d8664.setContent(html_61a5d582498b8009d88d8c068be26a03);
+        
+
+        marker_1e5bcd2536473c809891aef160131de4.bindPopup(popup_f75d7e0d896fc99ceb1da558182d8664)
+        ;
+
+        
+    
+    
+            var marker_c5fde8139da5ab0a0ec2cf053b6f95e3 = L.marker(
+                [44.3247, 4.9434],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_5c6df6c43d6b4873465416b80b1365ff = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c5fde8139da5ab0a0ec2cf053b6f95e3.setIcon(icon_5c6df6c43d6b4873465416b80b1365ff);
+        
+    
+        var popup_a733f7ea56235bdbd666f7fb7652e3ef = L.popup({"maxWidth": 300});
+
+        
+            var html_a77224358bdab20fd727f205a7b075f7 = $(`<div id="html_a77224358bdab20fd727f205a7b075f7" style="width: 100.0%; height: 100.0%;">     <b>Domaine des Lauribert</b><br>     <i>Visan</i><br>     Traditioneel, blend van Syrah/Grenache. Gerespecteerd lokaal domein.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3247,4.9434" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-lauribert.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_a733f7ea56235bdbd666f7fb7652e3ef.setContent(html_a77224358bdab20fd727f205a7b075f7);
+        
+
+        marker_c5fde8139da5ab0a0ec2cf053b6f95e3.bindPopup(popup_a733f7ea56235bdbd666f7fb7652e3ef)
+        ;
+
+        
+    
+    
+            var marker_54b694e4b8b08a032c3477d2b637c361 = L.marker(
+                [44.3217, 4.9383],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_91a3b250f5d9987cb5b216c84a72f3f2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_54b694e4b8b08a032c3477d2b637c361.setIcon(icon_91a3b250f5d9987cb5b216c84a72f3f2);
+        
+    
+        var popup_0c4a7c205b38a68bff47ec50aa41729f = L.popup({"maxWidth": 300});
+
+        
+            var html_06e8b48b6a0561c8c0c6987de1eab58b = $(`<div id="html_06e8b48b6a0561c8c0c6987de1eab58b" style="width: 100.0%; height: 100.0%;">     <b>Domaine La Florane</b><br>     <i>Visan</i><br>     Bio-dynamisch, zonder sulfiet. Frisse stijl, o.a. 'Je ne Souffre Plus'.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3217,4.9383" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-la-florane.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_0c4a7c205b38a68bff47ec50aa41729f.setContent(html_06e8b48b6a0561c8c0c6987de1eab58b);
+        
+
+        marker_54b694e4b8b08a032c3477d2b637c361.bindPopup(popup_0c4a7c205b38a68bff47ec50aa41729f)
+        ;
+
+        
+    
+    
+            var marker_ccc8c0a9736c3c69f4d5d231c8c24935 = L.marker(
+                [44.3263, 4.9429],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_8305d2ca78a4c628f38fa4ed6156a36c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ccc8c0a9736c3c69f4d5d231c8c24935.setIcon(icon_8305d2ca78a4c628f38fa4ed6156a36c);
+        
+    
+        var popup_27ba13aeed8cde5db909ddc4a8580129 = L.popup({"maxWidth": 300});
+
+        
+            var html_17e61b37d9740fe7ef1ba8b238616928 = $(`<div id="html_17e61b37d9740fe7ef1ba8b238616928" style="width: 100.0%; height: 100.0%;">     <b>Petit Ours (Matthieu Barret)</b><br>     <i>Visan</i><br>     100% Syrah, bio, laag sulfiet. Sappig en fris alternatief.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3263,4.9429" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-matthieu-barret.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_27ba13aeed8cde5db909ddc4a8580129.setContent(html_17e61b37d9740fe7ef1ba8b238616928);
+        
+
+        marker_ccc8c0a9736c3c69f4d5d231c8c24935.bindPopup(popup_27ba13aeed8cde5db909ddc4a8580129)
+        ;
+
+        
+    
+    
+            var marker_e747ea4d4d6726456020ad2aff093d42 = L.marker(
+                [44.4018, 4.9726],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_4dccff3b11688c69c801490df1e09640 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_e747ea4d4d6726456020ad2aff093d42.setIcon(icon_4dccff3b11688c69c801490df1e09640);
+        
+    
+        var popup_9a3d206d18af86aa6dc3211e33fa0105 = L.popup({"maxWidth": 300});
+
+        
+            var html_f05a500c89f8c5e72dde0150e3f35c1f = $(`<div id="html_f05a500c89f8c5e72dde0150e3f35c1f" style="width: 100.0%; height: 100.0%;">     <b>Domaine du Séminaire</b><br>     <i>Valréas</i><br>     Biologisch, 100 ha. Rode en witte Villages met finesse.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.4018,4.9726" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaineduseminaire.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_9a3d206d18af86aa6dc3211e33fa0105.setContent(html_f05a500c89f8c5e72dde0150e3f35c1f);
+        
+
+        marker_e747ea4d4d6726456020ad2aff093d42.bindPopup(popup_9a3d206d18af86aa6dc3211e33fa0105)
+        ;
+
+        
+    
+    
+            var marker_9776ed3243ea2c42f99b4fd857c13ef8 = L.marker(
+                [44.3978, 4.9842],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_84161a3b210021159b30b57e06b4542c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9776ed3243ea2c42f99b4fd857c13ef8.setIcon(icon_84161a3b210021159b30b57e06b4542c);
+        
+    
+        var popup_bbafd7671ec7cd9a8fbcdf41d62539b1 = L.popup({"maxWidth": 300});
+
+        
+            var html_188a90c939bf847aefa7ea9d0183aad7 = $(`<div id="html_188a90c939bf847aefa7ea9d0183aad7" style="width: 100.0%; height: 100.0%;">     <b>Domaine La Décelle</b><br>     <i>Valréas</i><br>     Biologisch (lutte raisonnée). Gestructureerde rode & witte wijnen.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3978,4.9842" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.lavau.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_bbafd7671ec7cd9a8fbcdf41d62539b1.setContent(html_188a90c939bf847aefa7ea9d0183aad7);
+        
+
+        marker_9776ed3243ea2c42f99b4fd857c13ef8.bindPopup(popup_bbafd7671ec7cd9a8fbcdf41d62539b1)
+        ;
+
+        
+    
+    
+            var marker_d7acd14e84674f2fe82f9ad22a426523 = L.marker(
+                [44.3787, 4.9926],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_2cf5db3e35c1cbc73db16a29e5c856eb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_d7acd14e84674f2fe82f9ad22a426523.setIcon(icon_2cf5db3e35c1cbc73db16a29e5c856eb);
+        
+    
+        var popup_efa79181e7a2227844b0de084e7c1c24 = L.popup({"maxWidth": 300});
+
+        
+            var html_e699d016452d1c75c66513a85cf4b12f = $(`<div id="html_e699d016452d1c75c66513a85cf4b12f" style="width: 100.0%; height: 100.0%;">     <b>Clos Bellane</b><br>     <i>Valréas</i><br>     Bio/biodynamisch. Frisse moderne stijl op hooggelegen percelen.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3787,4.9926" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.closbellane.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_efa79181e7a2227844b0de084e7c1c24.setContent(html_e699d016452d1c75c66513a85cf4b12f);
+        
+
+        marker_d7acd14e84674f2fe82f9ad22a426523.bindPopup(popup_efa79181e7a2227844b0de084e7c1c24)
+        ;
+
+        
+    
+    
+            var marker_1c77e3ba86eb4ecf8256fe6b0d2b0dc0 = L.marker(
+                [44.3974, 4.9791],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_267f9f86d2e7d8d855620b3f44cc8df8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1c77e3ba86eb4ecf8256fe6b0d2b0dc0.setIcon(icon_267f9f86d2e7d8d855620b3f44cc8df8);
+        
+    
+        var popup_b24ceab9a68ba8e5d7a2c95224462f2e = L.popup({"maxWidth": 300});
+
+        
+            var html_bf27dbdf372d4f5a93b3b811c4da2141 = $(`<div id="html_bf27dbdf372d4f5a93b3b811c4da2141" style="width: 100.0%; height: 100.0%;">     <b>Domaine de Lumian</b><br>     <i>Valréas</i><br>     Biologisch sinds 1999, handmatige oogst, deel in eik gerijpt.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3974,4.9791" target="_blank">📍 Google Maps</a><br>     </div>`)[0];
+            popup_b24ceab9a68ba8e5d7a2c95224462f2e.setContent(html_bf27dbdf372d4f5a93b3b811c4da2141);
+        
+
+        marker_1c77e3ba86eb4ecf8256fe6b0d2b0dc0.bindPopup(popup_b24ceab9a68ba8e5d7a2c95224462f2e)
+        ;
+
+        
+    
+    
+            var marker_d96012629545357362bfa897a51e459f = L.marker(
+                [44.3894, 4.9772],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_9e9802f8998f1de6bcba515d61522a8c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_d96012629545357362bfa897a51e459f.setIcon(icon_9e9802f8998f1de6bcba515d61522a8c);
+        
+    
+        var popup_a82c5a8ca3e432664465667084c604b2 = L.popup({"maxWidth": 300});
+
+        
+            var html_13516ab2ae49a6eb1e6f6b84f29c7ece = $(`<div id="html_13516ab2ae49a6eb1e6f6b84f29c7ece" style="width: 100.0%; height: 100.0%;">     <b>Domaine Gramenon (Michèle Aubéry)</b><br>     <i>Valréas</i><br>     Biodynamisch, Enclave des Papes. Kleinschalig, oude stokken.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.3894,4.9772" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.gramenon.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_a82c5a8ca3e432664465667084c604b2.setContent(html_13516ab2ae49a6eb1e6f6b84f29c7ece);
+        
+
+        marker_d96012629545357362bfa897a51e459f.bindPopup(popup_a82c5a8ca3e432664465667084c604b2)
+        ;
+
+        
+    
+    
+            var marker_7fa504071adfb34fd9955d24a47837b8 = L.marker(
+                [44.2547, 4.9707],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_7272b10200e7f099679eadfd41ecf44e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7fa504071adfb34fd9955d24a47837b8.setIcon(icon_7272b10200e7f099679eadfd41ecf44e);
+        
+    
+        var popup_7b807afdc50cf38b071f4a81f4efcad0 = L.popup({"maxWidth": 300});
+
+        
+            var html_7073e849cbde40904053ce1da406d3cd = $(`<div id="html_7073e849cbde40904053ce1da406d3cd" style="width: 100.0%; height: 100.0%;">     <b>Domaine Alary</b><br>     <i>Cairanne</i><br>     Biologisch, handpluk, cuvée 'La Brunote' veelgeprezen.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2547,4.9707" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-alary.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_7b807afdc50cf38b071f4a81f4efcad0.setContent(html_7073e849cbde40904053ce1da406d3cd);
+        
+
+        marker_7fa504071adfb34fd9955d24a47837b8.bindPopup(popup_7b807afdc50cf38b071f4a81f4efcad0)
+        ;
+
+        
+    
+    
+            var marker_a32044bafe298227af38965cd1d3ba9a = L.marker(
+                [44.2556, 4.9675],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_1b1bb5167a0e6214579e9a978b87b8db = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_a32044bafe298227af38965cd1d3ba9a.setIcon(icon_1b1bb5167a0e6214579e9a978b87b8db);
+        
+    
+        var popup_11654f64c6b7156418560afe0f05c863 = L.popup({"maxWidth": 300});
+
+        
+            var html_443f5ffd366d690b47c5c09c9ffa1a03 = $(`<div id="html_443f5ffd366d690b47c5c09c9ffa1a03" style="width: 100.0%; height: 100.0%;">     <b>Oratoire Saint‑Martin</b><br>     <i>Cairanne</i><br>     Biodynamisch. Cru’s als Haut Coustias. Oude stokken.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2556,4.9675" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.oratoiresaintmartin.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_11654f64c6b7156418560afe0f05c863.setContent(html_443f5ffd366d690b47c5c09c9ffa1a03);
+        
+
+        marker_a32044bafe298227af38965cd1d3ba9a.bindPopup(popup_11654f64c6b7156418560afe0f05c863)
+        ;
+
+        
+    
+    
+            var marker_d93325f807f0c4aed14e6705459e7a00 = L.marker(
+                [44.2581, 4.9762],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_a9a460dda7251ddab4dcf3788e0502c4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_d93325f807f0c4aed14e6705459e7a00.setIcon(icon_a9a460dda7251ddab4dcf3788e0502c4);
+        
+    
+        var popup_bba944d227bb5cd21709ca0ff46e57ad = L.popup({"maxWidth": 300});
+
+        
+            var html_dd86efcd81780194faa50f0f77d1ed1d = $(`<div id="html_dd86efcd81780194faa50f0f77d1ed1d" style="width: 100.0%; height: 100.0%;">     <b>Domaine Wilfried</b><br>     <i>Cairanne</i><br>     Biologisch, blend GSM. Soepel, fruitrijk. ~€16,50.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2581,4.9762" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-wilfried.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_bba944d227bb5cd21709ca0ff46e57ad.setContent(html_dd86efcd81780194faa50f0f77d1ed1d);
+        
+
+        marker_d93325f807f0c4aed14e6705459e7a00.bindPopup(popup_bba944d227bb5cd21709ca0ff46e57ad)
+        ;
+
+        
+    
+    
+            var marker_ee6ac424376faf5afaf3f0d62548bed1 = L.marker(
+                [44.2525, 4.9737],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_2bc173ce9537878e7d50290f39a988dd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ee6ac424376faf5afaf3f0d62548bed1.setIcon(icon_2bc173ce9537878e7d50290f39a988dd);
+        
+    
+        var popup_9b787e6924f5aedf955aa563af07359b = L.popup({"maxWidth": 300});
+
+        
+            var html_576cdfa5671916d9d858de3493f727f5 = $(`<div id="html_576cdfa5671916d9d858de3493f727f5" style="width: 100.0%; height: 100.0%;">     <b>Rabasse‑Charavin</b><br>     <i>Cairanne</i><br>     Krachtige wijnen. Cuvée d’Estevenas van oude stokken.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2525,4.9737" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.rabassecharavin.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_9b787e6924f5aedf955aa563af07359b.setContent(html_576cdfa5671916d9d858de3493f727f5);
+        
+
+        marker_ee6ac424376faf5afaf3f0d62548bed1.bindPopup(popup_9b787e6924f5aedf955aa563af07359b)
+        ;
+
+        
+    
+    
+            var marker_481e35e2e12d5700f8972c40b12cf0de = L.marker(
+                [44.2584, 4.9641],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_9a0b24b15e4c494248147d123bf85a6d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_481e35e2e12d5700f8972c40b12cf0de.setIcon(icon_9a0b24b15e4c494248147d123bf85a6d);
+        
+    
+        var popup_ffbd30339ba21c1aa256cf28952c7232 = L.popup({"maxWidth": 300});
+
+        
+            var html_1eae86e388a03177b8b7e12a5200ced8 = $(`<div id="html_1eae86e388a03177b8b7e12a5200ced8" style="width: 100.0%; height: 100.0%;">     <b>Domaine de Galuval</b><br>     <i>Cairanne</i><br>     Klein domein, bezoek mogelijk via Winalist. Goede reputatie.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2584,4.9641" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domainedegaluval.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_ffbd30339ba21c1aa256cf28952c7232.setContent(html_1eae86e388a03177b8b7e12a5200ced8);
+        
+
+        marker_481e35e2e12d5700f8972c40b12cf0de.bindPopup(popup_ffbd30339ba21c1aa256cf28952c7232)
+        ;
+
+        
+    
+    
+            var marker_639102fc56a000d4509e53f29c37ac2f = L.marker(
+                [44.2516, 4.9592],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_34ea779487fba31cfada3a76393663d2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_639102fc56a000d4509e53f29c37ac2f.setIcon(icon_34ea779487fba31cfada3a76393663d2);
+        
+    
+        var popup_52f0a32fe77c6f978f30bc2427fdb094 = L.popup({"maxWidth": 300});
+
+        
+            var html_12a41f767095f4ca6aae2d4216efd6bc = $(`<div id="html_12a41f767095f4ca6aae2d4216efd6bc" style="width: 100.0%; height: 100.0%;">     <b>Les Aphillanthes & Escaravailles</b><br>     <i>Cairanne</i><br>     Frisse stijl, koel vergist. Reservecuvées met oude stokken.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.2516,4.9592" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-les-aphi... (afgekort)" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_52f0a32fe77c6f978f30bc2427fdb094.setContent(html_12a41f767095f4ca6aae2d4216efd6bc);
+        
+
+        marker_639102fc56a000d4509e53f29c37ac2f.bindPopup(popup_52f0a32fe77c6f978f30bc2427fdb094)
+        ;
+
+        
+    
+    
+            var marker_61b8fe3ca2d8902505ac59b2e6491756 = L.marker(
+                [44.1373, 5.0061],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_e3fb59e630f54e878c86463368411409 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_61b8fe3ca2d8902505ac59b2e6491756.setIcon(icon_e3fb59e630f54e878c86463368411409);
+        
+    
+        var popup_6ee96e88ed0d4d60232a223301778eae = L.popup({"maxWidth": 300});
+
+        
+            var html_5796f33b86cab0767dbdcf5c2cc36a80 = $(`<div id="html_5796f33b86cab0767dbdcf5c2cc36a80" style="width: 100.0%; height: 100.0%;">     <b>Domaine la Fourmone</b><br>     <i>Vacqueyras</i><br>     Biologisch, spontaan vergist in beton. Zacht, vol en zuiver.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1373,5.0061" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.lafourmone.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_6ee96e88ed0d4d60232a223301778eae.setContent(html_5796f33b86cab0767dbdcf5c2cc36a80);
+        
+
+        marker_61b8fe3ca2d8902505ac59b2e6491756.bindPopup(popup_6ee96e88ed0d4d60232a223301778eae)
+        ;
+
+        
+    
+    
+            var marker_132ea78b80cc384380b9d15893fee6bf = L.marker(
+                [44.1355, 5.0112],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_7261410fb517185b2f7d8487bf998064 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_132ea78b80cc384380b9d15893fee6bf.setIcon(icon_7261410fb517185b2f7d8487bf998064);
+        
+    
+        var popup_26ebac1fa83b7948d012175d535280ee = L.popup({"maxWidth": 300});
+
+        
+            var html_886697807eb16a4bdc79a97bd234d6ce = $(`<div id="html_886697807eb16a4bdc79a97bd234d6ce" style="width: 100.0%; height: 100.0%;">     <b>Domaine d’Ouréa</b><br>     <i>Vacqueyras</i><br>     Bio-biodynamisch, handgeplukt. Blend met Cinsault & Carignan.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1355,5.0112" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domaine-ourea.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_26ebac1fa83b7948d012175d535280ee.setContent(html_886697807eb16a4bdc79a97bd234d6ce);
+        
+
+        marker_132ea78b80cc384380b9d15893fee6bf.bindPopup(popup_26ebac1fa83b7948d012175d535280ee)
+        ;
+
+        
+    
+    
+            var marker_cef56f60386d3d4bfea2cd9ec0393b90 = L.marker(
+                [44.1371, 5.0124],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_7387533689cc934c5938c577db4f3077 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_cef56f60386d3d4bfea2cd9ec0393b90.setIcon(icon_7387533689cc934c5938c577db4f3077);
+        
+    
+        var popup_954fdd73eb346b92a4c28a9562d6e846 = L.popup({"maxWidth": 300});
+
+        
+            var html_e7237b1a0832132cfa5340b0d15b0fcd = $(`<div id="html_e7237b1a0832132cfa5340b0d15b0fcd" style="width: 100.0%; height: 100.0%;">     <b>Camille Cayran</b><br>     <i>Vacqueyras</i><br>     Biologisch, blend van Grenache, Mourvèdre & Syrah.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1371,5.0124" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.camillecayran.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_954fdd73eb346b92a4c28a9562d6e846.setContent(html_e7237b1a0832132cfa5340b0d15b0fcd);
+        
+
+        marker_cef56f60386d3d4bfea2cd9ec0393b90.bindPopup(popup_954fdd73eb346b92a4c28a9562d6e846)
+        ;
+
+        
+    
+    
+            var marker_0d8f0938020760153ef12f0512c6d8c8 = L.marker(
+                [44.1341, 5.0174],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_9cb98db803f196dc9892bf24ca39c6f2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_0d8f0938020760153ef12f0512c6d8c8.setIcon(icon_9cb98db803f196dc9892bf24ca39c6f2);
+        
+    
+        var popup_41a16e18d2aab3cd9af95372317fdfb3 = L.popup({"maxWidth": 300});
+
+        
+            var html_6fd1483237a8cba38329b3c89689f283 = $(`<div id="html_6fd1483237a8cba38329b3c89689f283" style="width: 100.0%; height: 100.0%;">     <b>Clos de Caveau</b><br>     <i>Vacqueyras</i><br>     'Fruit Sauvage'. Biologisch, elegante tannines. 17+/20 JR.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1341,5.0174" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.closdecaveau.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_41a16e18d2aab3cd9af95372317fdfb3.setContent(html_6fd1483237a8cba38329b3c89689f283);
+        
+
+        marker_0d8f0938020760153ef12f0512c6d8c8.bindPopup(popup_41a16e18d2aab3cd9af95372317fdfb3)
+        ;
+
+        
+    
+    
+            var marker_07b1c1877d5446533d5dcd3b7aca6fdf = L.marker(
+                [44.1362, 5.0145],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_e5e0dc03ff3b1a39b4ce35ef7d347ab2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_07b1c1877d5446533d5dcd3b7aca6fdf.setIcon(icon_e5e0dc03ff3b1a39b4ce35ef7d347ab2);
+        
+    
+        var popup_1f1b159d0aa0e70c1d895a9950223a13 = L.popup({"maxWidth": 300});
+
+        
+            var html_18707eb35f2282306716fb2ef3c1e3a6 = $(`<div id="html_18707eb35f2282306716fb2ef3c1e3a6" style="width: 100.0%; height: 100.0%;">     <b>Le Sang des Cailloux</b><br>     <i>Vacqueyras</i><br>     Biologisch. Doucinello 2023: 92 Decanter, fris en sappig.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1362,5.0145" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.sangdescailloux.com" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_1f1b159d0aa0e70c1d895a9950223a13.setContent(html_18707eb35f2282306716fb2ef3c1e3a6);
+        
+
+        marker_07b1c1877d5446533d5dcd3b7aca6fdf.bindPopup(popup_1f1b159d0aa0e70c1d895a9950223a13)
+        ;
+
+        
+    
+    
+            var marker_5280afd1e78abc869171afb33c7437c8 = L.marker(
+                [44.1382, 5.0128],
+                {}
+            ).addTo(marker_cluster_57bee66e876c2a42ba2b1dec05cd9ac5);
+        
+    
+            var icon_4c6e783f08320b96e37e4ac65ed63cac = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5280afd1e78abc869171afb33c7437c8.setIcon(icon_4c6e783f08320b96e37e4ac65ed63cac);
+        
+    
+        var popup_37fec340c936b63c8578471922d9a5f1 = L.popup({"maxWidth": 300});
+
+        
+            var html_9928892555d93913f226d6c67a7108fe = $(`<div id="html_9928892555d93913f226d6c67a7108fe" style="width: 100.0%; height: 100.0%;">     <b>Domaine de la Ganse</b><br>     <i>Vacqueyras</i><br>     9 ha, bio sinds 2014, witte en rode Vacqueyras.<br>     <a class="map-link" href="https://www.google.com/maps?q=44.1382,5.0128" target="_blank">📍 Google Maps</a><br>     <a class="map-link" href="https://www.domainelaganse.fr" target="_blank">🌐 Bezoek website</a></div>`)[0];
+            popup_37fec340c936b63c8578471922d9a5f1.setContent(html_9928892555d93913f226d6c67a7108fe);
+        
+
+        marker_5280afd1e78abc869171afb33c7437c8.bindPopup(popup_37fec340c936b63c8578471922d9a5f1)
+        ;
+
+        
+    
+</script>
 </html>
